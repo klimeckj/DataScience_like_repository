@@ -1,0 +1,3289 @@
+{
+	"info": {
+		"_postman_id": "ee2a6867-fc91-4e83-8d70-eec5bffc067f",
+		"name": "Fintech banking API",
+		"description": "# 🏦 Get started here\n\nThis collection is a blueprint template, demonstrating the core features of a fintech banking REST API, including accounts, payments, transfers, and investment and transaction management. You can use this template as inspiration to build your custom API or extend it to work with one you've already started working on.\n\n### 🔐 Authentication and authorization\n\nThis template assumes the user making requests to the Fintech banking app REST API would be authenticated, for example using a Bearer token. You can choose an authentication method to apply to the whole collection by selecting the collection and navigating to the Authorization tab.\n\n## 🔖 How to use this template?\n\n#### Step 1: Send the requests\n\nSend the requests and view the response returned by the mock API, or check out the examples included.\n\n#### Step 2: Update the base URL\n\nSelect the collection and navigate to the “Variables” tab. Update the `base_url` variable with your API's URL.\n\n#### Step 3: Customize the requests\n\nUpdate the different parts of the requests to suit your use case, including the request body, authorization, documentation, headers, tests, and path parameters.\n\n#### Step 4: Continue building the collection\n\nCreate requests in this collection to test the new API endpoints you develop.\n\n## ℹ️ **Resources**\n\n[Building requests](https://learning.postman.com/docs/sending-requests/requests/)  \n[Authorizing requests](https://learning.postman.com/docs/sending-requests/authorization/)  \n[Using variables](https://learning.postman.com/docs/sending-requests/variables/)  \n[Creating your first collection](https://learning.postman.com/docs/getting-started/creating-the-first-collection/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28263287"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Statement",
+					"item": [
+						{
+							"name": "Latest",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const res = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"const template = `",
+											"    <style>",
+											"        .summary ul {",
+											"            list-style-type: none;",
+											"        }",
+											"        .summary div {",
+											"            display: inline-block;",
+											"            width: 33%;",
+											"        }",
+											"    </style>",
+											"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+											"    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>",
+											"    <script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>",
+											"    <h1>PM Credit Union</h1>",
+											"    <div class=\"summary\">",
+											"        <div>",
+											"            <ul>",
+											"                <li><strong>Statement: </strong> {{res.period}}</li>",
+											"                <li><strong>Opening balance: </strong> \\${{res.balance.opening}}</li>",
+											"                <li><strong>Closing balance: </strong> \\${{res.balance.closing}}</li>",
+											"            </ul>",
+											"        </div>",
+											"        <div>",
+											"            <ul>",
+											"                <li><strong>Account: </strong> {{accountNumber}}</li>",
+											"                <li><strong>Money in: </strong> \\${{res.money.in}}</li>",
+											"                <li><strong>Money out: </strong> \\${{res.money.out}}</li>",
+											"            </ul>",
+											"        </div>",
+											"    </div>",
+											"    <div class=\"table\">",
+											"        <table>",
+											"            <thead>",
+											"                <tr>",
+											"                    <th>Date</th>",
+											"                    <th>Type</th>",
+											"                    <th>Description</th>",
+											"                    <th>Amount</th>",
+											"                    <th>Balance</th>",
+											"                </tr>",
+											"            </thead>",
+											"            <tbody>",
+											"            {{#each res.transactions}}",
+											"                <tr>",
+											"                    <td>{{date}}</td>",
+											"                    <td>{{type}}</td>",
+											"                    <td>{{description}}</td>",
+											"                    <td>{{amount}}</td>",
+											"                    <td>{{balance}}</td>",
+											"                </tr>",
+											"            {{/each}}",
+											"            </tbody>",
+											"        </table>",
+											"    </div>",
+											"",
+											"    <script>",
+											"        $('table').DataTable()",
+											"    </script>",
+											"`",
+											"const accountNumber = pm.globals.get('accountNumber');",
+											"pm.visualizer.set(template, { res, accountNumber });"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/accounts/:accountNumber/statement/latest",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"accounts",
+										":accountNumber",
+										"statement",
+										"latest"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": "ACT123456"
+										}
+									]
+								},
+								"description": "Retrieves the latest statement for a specific account."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/accounts/:accountNumber/statement/latest",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"accounts",
+												":accountNumber",
+												"statement",
+												"latest"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": "ACT123456"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"period\": \"latest\",\n    \"balance\": {\n        \"opening\": {{$randomPrice}},\n        \"closing\": {{$randomPrice}}\n    },\n    \"money\": {\n        \"in\": {{$randomPrice}},\n        \"out\": {{$randomPrice}}\n    },\n    \"transactions\": [\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Date",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const res = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"const template = `",
+											"    <style>",
+											"        .summary ul {",
+											"            list-style-type: none;",
+											"        }",
+											"        .summary div {",
+											"            display: inline-block;",
+											"            width: 33%;",
+											"        }",
+											"    </style>",
+											"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+											"    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>",
+											"    <script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>",
+											"    <h1>PM Credit Union</h1>",
+											"    <div class=\"summary\">",
+											"        <div>",
+											"            <ul>",
+											"                <li><strong>Statement: </strong> {{res.period}}</li>",
+											"                <li><strong>Opening balance: </strong> \\${{res.balance.opening}}</li>",
+											"                <li><strong>Closing balance: </strong> \\${{res.balance.closing}}</li>",
+											"            </ul>",
+											"        </div>",
+											"        <div>",
+											"            <ul>",
+											"                <li><strong>Account: </strong> {{accountNumber}}</li>",
+											"                <li><strong>Money in: </strong> \\${{res.money.in}}</li>",
+											"                <li><strong>Money out: </strong> \\${{res.money.out}}</li>",
+											"            </ul>",
+											"        </div>",
+											"    </div>",
+											"    <div class=\"table\">",
+											"        <table>",
+											"            <thead>",
+											"                <tr>",
+											"                    <th>Date</th>",
+											"                    <th>Type</th>",
+											"                    <th>Description</th>",
+											"                    <th>Amount</th>",
+											"                    <th>Balance</th>",
+											"                </tr>",
+											"            </thead>",
+											"            <tbody>",
+											"            {{#each res.transactions}}",
+											"                <tr>",
+											"                    <td>{{date}}</td>",
+											"                    <td>{{type}}</td>",
+											"                    <td>{{description}}</td>",
+											"                    <td>{{amount}}</td>",
+											"                    <td>{{balance}}</td>",
+											"                </tr>",
+											"            {{/each}}",
+											"            </tbody>",
+											"        </table>",
+											"    </div>",
+											"",
+											"    <script>",
+											"        $('table').DataTable()",
+											"    </script>",
+											"`",
+											"const accountNumber = pm.globals.get('accountNumber');",
+											"pm.visualizer.set(template, { res, accountNumber });"
+										]
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "from",
+											"value": "{{$randomDatePast}}",
+											"type": "text"
+										},
+										{
+											"key": "to",
+											"value": "{{$randomDateRecent}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/accounts/:accountNumber/statement/date",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"accounts",
+										":accountNumber",
+										"statement",
+										"date"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": "ACT123456"
+										}
+									]
+								},
+								"description": "Retrieves the account statement for a specific date range."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/accounts/:accountNumber/statement/date",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"accounts",
+												":accountNumber",
+												"statement",
+												"date"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": "ACT123456"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 14 Jun 2021 14:30:25 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "x-srv-trace",
+											"value": "v=1;t=d33d68b932344fce"
+										},
+										{
+											"key": "x-srv-span",
+											"value": "v=1;s=210e5b055e5bd71e"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "120"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "119"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1623681083"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"96-S/5iQ2y1qqIInh5BwoPc+chvDJU\""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"period\": {\n        \"from\": \"{{$randomDatePast}}\",\n        \"to\": \"{{$randomDateRecent}}\"\n    },\n    \"balance\": {\n        \"opening\": {{$randomPrice}},\n        \"closing\": {{$randomPrice}}\n    },\n    \"money\": {\n        \"in\": {{$randomPrice}},\n        \"out\": {{$randomPrice}}\n    },\n    \"transactions\": [\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        },\n        {\n            \"date\": \"{{$randomDateRecent}}\",\n            \"description\": \"{{$randomCompanyName}}\",\n            \"type\": \"{{$randomTransactionType}}\",\n            \"amount\": {{$randomPrice}},\n            \"balance\": {{$randomPrice}}\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const res = pm.response.json();",
+											"",
+											"pm.globals.set(\"accountNumber\", res.details.domestic.account);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"{{$randomBankAccountName}}\",\n    \"holder\": \"{{customerId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/accounts/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"accounts",
+										"create"
+									]
+								},
+								"description": "Creates a new account for a customer."
+							},
+							"response": [
+								{
+									"name": "201 Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"type\": \"Home Loan Account\",\n    \"holder\": {\n        \"name\": {\n            \"first\": \"Zola\",\n            \"middle\": \"Tanner\",\n            \"last\": \"Beer\"\n        },\n        \"dob\": \"Mon Jul 04 2022 03:55:45 GMT+0200 (Central European Summer Time)\",\n        \"address\": {\n            \"street\": \"20918 Kamryn Islands\",\n            \"city\": \"Joanaberg\",\n            \"country\": \"Somalia\"\n        }\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/accounts/create",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"accounts",
+												"create"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"{{$randomBankAccountName}}\",\n    \"details\": {\n        \"domestic\": {\n            \"account\": \"{{$randomBankAccount}}\",\n            \"routing\": \"{{$randomBankAccount}}\"\n        },\n        \"international\": {\n            \"bic\": \"{{$randomBankAccountBic}}\",\n            \"iban\": \"{{$randomBankAccountIban}}\"\n        }\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Overview",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"const template = `",
+									"    <style>",
+									"        .account-overview {",
+									"            width: 80%;",
+									"            margin: 0 auto;",
+									"            border: 1px solid black;",
+									"            padding: 10px;",
+									"        }",
+									"",
+									"        .account-overview div {",
+									"            display: inline-block;",
+									"            width: 31%;",
+									"            background: #efefef;",
+									"            padding: 20px;",
+									"            box-sizing: border-box;",
+									"            margin-right: 10px;",
+									"        }",
+									"",
+									"        .account-overview p {",
+									"            line-height: 0px;",
+									"            word-wrap: wrap;",
+									"        }",
+									"",
+									"        .account-overview ul {",
+									"            list-style-type: none;",
+									"        }",
+									"    </style>",
+									"    <div class=\"account-overview\">",
+									"        <h3>PM Credit Union</h3>",
+									"        <ul>",
+									"            <li><strong>Account type:</strong> {{res.type}}</li>",
+									"            <li><strong>Interest rate:</strong> {{res.interestRate}}%</li>",
+									"            <li><strong>Last statement date:</strong> {{res.lastStatementDate}}</li>",
+									"        </ul>",
+									"        <div>",
+									"            <h5>Balance</h5>",
+									"            <p><strong>Available:</strong> \\${{res.balance.available}}</p>",
+									"            <p><strong>Present:</strong> \\${{res.balance.present}}</p>",
+									"        </div>",
+									"        <div>",
+									"            <h5>Domestic details</h5>",
+									"            <p><strong>Account No:</strong> {{res.details.domestic.account}}</p>",
+									"            <p><strong>Routing No:</strong> {{res.details.domestic.routing}}</p>",
+									"        </div>",
+									"        <div>",
+									"            <h5>Intl details</h5>",
+									"            <p><strong>BIC:</strong> {{res.details.international.bic}}</p>",
+									"            <p><strong>IBAN:</strong> {{res.details.international.bic}}</p>",
+									"        </div>",
+									"    </div>",
+									"",
+									"",
+									"`",
+									"pm.visualizer.set(template, { res });"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/accounts/:accountNumber/overview",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								":accountNumber",
+								"overview"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": null
+								}
+							]
+						},
+						"description": "Retrieves an overview of a specific account."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/accounts/:accountNumber/overview",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"accounts",
+										":accountNumber",
+										"overview"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"{{$randomBankAccountName}}\",\n    \"balance\": {\n        \"available\": {{$randomPrice}},\n        \"present\": {{$randomPrice}}\n    },\n    \"details\": {\n        \"domestic\": {\n            \"account\": \"{{$randomBankAccount}}\",\n            \"routing\": \"{{$randomBankAccount}}\"\n        },\n        \"international\": {\n            \"bic\": \"{{$randomBankAccountBic}}\",\n            \"iban\": \"{{$randomBankAccountIban}}\"\n        }\n    },\n    \"interestRate\": 0.01,\n    \"lastStatementDate\": \"{{$randomDateRecent}}\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder includes endpoints related to account management, such as retrieving the latest account statement, creating a new account, and getting an account overview."
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "New user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('API response is successful', () => {",
+									"    pm.expect(res.status).to.eql('success');",
+									"});",
+									"",
+									"pm.test('Created user has correct type of user ID', () => {",
+									"    pm.expect(res.id).to.be.a('string');",
+									"});",
+									"",
+									"pm.test('Does not expose user password', () => {",
+									"    pm.expect(res).to.not.have.property('password');",
+									"});",
+									"",
+									"pm.test('Created user has all relevant fields', () => {",
+									"    pm.expect(res).to.have.all.keys('status', 'id', 'firstName', 'lastName');",
+									"});",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.environment.get('url')}/delete?id=${res.id}`,",
+									"    method: 'delete'",
+									"});",
+									"",
+									"function rawToObject (str) {",
+									"    return str.split('&').reduce((prev, curr, i, arr) => {",
+									"        var p = curr.split('=');",
+									"        prev[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);",
+									"        return prev;",
+									"    }, {});",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "{{$randomFirstName}}",
+									"description": "The user's first name (required)",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "{{$randomLastName}}",
+									"description": "The user's last name (required)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"create"
+							]
+						},
+						"description": "Creates a new user in the system. The user will be assigned an ID automatically. This can be found in the response."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "firstName",
+											"value": "{{firstName}}",
+											"description": "The user's first name (required)",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "{{lastName}}",
+											"description": "The user's last name (required)",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"description": "The user's password (required)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65-KsPJ95rCxmmvvRBY2Sqroxk2vmA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 23:58:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"firstName\": \"Ben\",\n    \"lastName\": \"Smith\",\n    \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"const id = pm.globals.get('id');",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('One user exists', () => {",
+									"   pm.expect(res).to.have.length(2);",
+									"});",
+									"",
+									"pm.test('User has all relevant fields', () => {",
+									"    res.forEach((val, i) => {",
+									"        if (i > 0) {",
+									"            pm.expect(val).to.have.all.keys('id', 'firstName', 'lastName');",
+									"            ",
+									"        }",
+									"    });",
+									"});",
+									"",
+									"pm.test('User passwords are not exposed', () => {",
+									"    res.forEach((val) => {",
+									"       pm.expect(val).to.not.have.property('password');",
+									"    });",
+									"});",
+									"",
+									"// cleanup",
+									"pm.globals.unset('id');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('cURL')}/delete?id=${id}`,",
+									"    method: 'delete'",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const firstName = pm.variables.get('firstName');",
+									"const lastName = pm.variables.get('lastName');",
+									"const password = pm.variables.get('password');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/create`,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: `firstName=${firstName}&lastName=${lastName}&password=${password}`",
+									"    }",
+									"}, (err, res) => {",
+									"    res = res.json();",
+									"    pm.globals.set('id', res.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "key",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/customers/get?all=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"get"
+							],
+							"query": [
+								{
+									"key": "all",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Get all users in the system."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/get?all=true",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"get"
+									],
+									"query": [
+										{
+											"key": "all",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-ti7ujd/Cyb8EeoWoqRXh482Zy5o\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:00:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"status\": \"success\"\n    },\n    {\n        \"firstName\": \"Ben\",\n        \"lastName\": \"Smith\",\n        \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get user by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"const id = pm.globals.get('id');",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('User matches requested user', () => {",
+									"    const id = pm.request.url.query.get('id');",
+									"    pm.expect(res[1].id).to.eql(id);",
+									"});",
+									"",
+									"pm.test('User has correct type of user ID', () => {",
+									"    pm.expect(res[1].id).to.be.a('string');",
+									"});",
+									"",
+									"pm.test('Does not expose user password', () => {",
+									"    pm.expect(res[1]).to.not.have.property('password');",
+									"});",
+									"",
+									"pm.test('User has all relevant fields', () => {",
+									"    pm.expect(res[1]).to.have.all.keys('id', 'firstName', 'lastName');",
+									"});",
+									"",
+									"// cleanup",
+									"pm.collectionVariables.unset('customer_id');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/delete?id=${id}`,",
+									"    method: 'delete'",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const firstName = pm.variables.get('firstName');",
+									"const lastName = pm.variables.get('lastName');",
+									"const password = pm.variables.get('password');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/customers/create`,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: `firstName=${firstName}&lastName=${lastName}&password=${password}`",
+									"    }",
+									"}, (err, res) => {",
+									"    res = res.json();",
+									"    pm.globals.set('id', res.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/get/?id={{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"get",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}",
+									"description": "The user's ID (required)"
+								}
+							]
+						},
+						"description": "Retrieves a user by `id`."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/get/?id={{id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"get",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{id}}",
+											"description": "The user's ID (required)"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-PWyeF3E5khoqlHSeQl62TwtxWks\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:03:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"status\": \"success\"\n    },\n    {\n        \"firstName\": \"Ben\",\n        \"lastName\": \"Smith\",\n        \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n    }\n]"
+						},
+						{
+							"name": "404 Not found - No User found for ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/get/?id={{id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"get",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{id}}",
+											"description": "The user's ID (required)"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-+nHORFhZtwqol4/kZqGURIjn3RE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:39:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"no user found\",\n    \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get users by last name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"const id = pm.globals.get('id');",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('List of users is returned', () => {",
+									"    pm.expect(res).to.be.an('array');",
+									"});",
+									"",
+									"pm.test('User passwords are not exposed', () => {",
+									"    res.forEach((val, i) => {",
+									"        if (i > 0) {",
+									"            pm.expect(val).to.not.have.all.keys('password');   ",
+									"        }",
+									"    });",
+									"});",
+									"",
+									"pm.test('User has all relevant fields and correct types', () => {",
+									"    res.forEach((val, i) => {",
+									"        if (i > 0) {",
+									"            pm.expect(val.id).to.be.a('string');",
+									"            pm.expect(val.firstName).to.be.a('string');",
+									"            pm.expect(val.lastName).to.be.a('string');",
+									"        }",
+									"    });",
+									"});",
+									"",
+									"// cleanup",
+									"pm.globals.unset('id');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('cURL')}/delete?id=${id}`,",
+									"    method: 'delete'",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const firstName = pm.variables.get('firstName');",
+									"const lastName = pm.variables.get('lastName');",
+									"const password = pm.variables.get('password');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/customers/create`,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: `firstName=${firstName}&lastName=${lastName}&password=${password}`",
+									"    }",
+									"}, (err, res) => {",
+									"    res = res.json();",
+									"    pm.globals.set('id', res.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/get/?firstName={{$randomLastName}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"get",
+								""
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "{{$randomLastName}}",
+									"description": "The user's first name (required)"
+								}
+							]
+						},
+						"description": "Retrieves all users with the given `firstName`."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/get/?firstName={{$randomLastName}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"get",
+										""
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": "{{$randomLastName}}",
+											"description": "The user's first name (required)"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-F/ktIhtM5We/sndYYNUK1vmdEnQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:05:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"status\": \"success\"\n    },\n    {\n        \"firstName\": \"{{$randomFirstName}}\",\n        \"lastName\": \"{{$randomLastName}}\",\n        \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"const id = pm.request.url.query.get('id');",
+									"const firstName = pm.request.body.urlencoded.get('firstName');",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (res.status === 'success') {",
+									"    pm.test('User matches requested user', () => {",
+									"        pm.expect(res.id).to.eql(id);",
+									"    });",
+									"    ",
+									"    pm.test('User has correct type of user ID', () => {",
+									"        pm.expect(res.id).to.be.a('string');",
+									"    });",
+									"    ",
+									"    pm.test('User has all relevant fields', () => {",
+									"        pm.expect(res).to.have.all.keys('status', 'id', 'firstName', 'lastName');",
+									"    });",
+									"    ",
+									"    pm.test('Does not expose user password', () => {",
+									"        pm.expect(res).to.not.have.property('password');",
+									"    });",
+									"    ",
+									"    pm.test('First name is updated to: ' + firstName, () => {",
+									"        pm.expect(res.firstName).to.eql(firstName);",
+									"    });",
+									"}",
+									"",
+									"else if (res.status === 'no user found') {",
+									"    pm.test('Lookup was against correct user', () => {",
+									"        pm.expect(res.id).to.eql(id);",
+									"    });",
+									"}",
+									"",
+									"else {",
+									"    pm.test(res.status).to.eql('invalid request');",
+									"}",
+									"",
+									"// cleanup",
+									"pm.globals.unset('id');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('cURL')}/delete?id=${id}`,",
+									"    method: 'delete'",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const firstName = pm.variables.get('firstName');",
+									"const lastName = pm.variables.get('lastName');",
+									"const password = pm.variables.get('password');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/customers/create`,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: `firstName=${firstName}&lastName=${lastName}&password=${password}`",
+									"    }",
+									"}, (err, res) => {",
+									"    res = res.json();",
+									"    pm.globals.set('id', res.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Benjamin",
+									"description": "The user's new first name",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "foobar",
+									"description": "The user's new password",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/update?id={{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}",
+									"description": "The user's ID (required)"
+								}
+							]
+						},
+						"description": "Updates user details. Send the keys that you'd like to update, this can be one or more of `firstName`, `lastName` and `password`."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "firstName",
+											"value": "Benjamin",
+											"description": "The user's new first name",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "foobar",
+											"description": "The user's new password",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/update?id={{id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{id}}",
+											"description": "The user's ID (required)"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6a-SA9mzR+M2pmN7WPGgLm1ZqtRYis\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:18:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"firstName\": \"Benjamin\",\n    \"lastName\": \"Smith\",\n    \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const response = pm.response;",
+									"const id = pm.globals.get('id');",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Operation is successful', () => {",
+									"    const res = response.json();",
+									"    pm.expect(res.status).to.eql('success');",
+									"});",
+									"",
+									"pm.test('User matches requested user', () => {",
+									"    const res = response.json();",
+									"    pm.expect(res.id).to.eql(id);",
+									"});",
+									"",
+									"pm.test('User can no longer be found', () => {",
+									"    pm.sendRequest({",
+									"        url: `${pm.collectionVariables.get('base_url')}/get?id=${id}`,",
+									"        header: 'x-mock-response-name:Get user by ID (no user found)',",
+									"        method: 'get'",
+									"    }, (err, res) => {",
+									"        res = res.json();",
+									"        pm.expect(res.status).to.eql('no user found');",
+									"    });",
+									"});",
+									"",
+									"// cleanup",
+									"pm.globals.unset('id');"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const firstName = pm.variables.get('firstName');",
+									"const lastName = pm.variables.get('lastName');",
+									"const password = pm.variables.get('password');",
+									"",
+									"pm.sendRequest({",
+									"    url: `${pm.collectionVariables.get('base_url')}/create`,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: `firstName=${firstName}&lastName=${lastName}&password=${password}`",
+									"    }",
+									"}, (err, res) => {",
+									"    res = res.json();",
+									"    pm.globals.set('id', res.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/delete?id={{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}",
+									"description": "The user's ID"
+								}
+							]
+						},
+						"description": "Deletes a user from the system by `id`."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/delete?id={{id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{id}}",
+											"description": "The user's ID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-bT/ASzl0KO3wj/eo2xEBaHPLnvk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jan 2019 00:20:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"id\": \"0729d37c-ef9f-4ffa-8f71-a6eedf1f95b7\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder includes endpoints for managing customer data, including creating new users, retrieving user information by ID or last name, updating user information, and deleting users."
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Payees",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/:accountNumber/payees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										":accountNumber",
+										"payees"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								},
+								"description": "Retrieves a list of payees for a specific account."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/payments/:accountNumber/payees",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"payments",
+												":accountNumber",
+												"payees"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    },\n    {\n        \"name\": \"{{$randomFullName}}\",\n        \"checking\": {{$randomBankAccount}},\n        \"routing\": {{$randomBankAccount}}\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const res = pm.response.json()",
+											"",
+											"pm.globals.set(\"payeeId\", res.payeeId);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomFullName}}\",\n    \"checking\": {{$randomBankAccount}},\n    \"routing\": {{$randomBankAccount}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payments/:accountNumber/payees/add",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										":accountNumber",
+										"payees",
+										"add"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								},
+								"description": "Adds a new payee for a specific account."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Ms. Alan Beahan\",\n    \"checking\": 86828833,\n    \"routing\": 50466860\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/payments/:accountNumber/payees/add",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"payments",
+												":accountNumber",
+												"payees",
+												"add"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"payeeId\": \"{{$randomUUID}}\"\n}"
+								}
+							]
+						}
+					],
+					"description": "Retrieves a list of payees for a specific account."
+				},
+				{
+					"name": "Limits",
+					"item": [
+						{
+							"name": "Current",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/:accountNumber/limits",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										":accountNumber",
+										"limits"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								},
+								"description": "Retrieves the current payment limits for a specific account."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/payments/:accountNumber/limits",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"payments",
+												":accountNumber",
+												"limits"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"daily\": 30000\n}"
+								}
+							]
+						},
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.globals.set(\"limit\", \"30000\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"daily\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payments/:accountNumber/limits",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										":accountNumber",
+										"limits"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								},
+								"description": "Updates the payment limits for a specific account."
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"daily\": 30000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/payments/:accountNumber/limits",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"payments",
+												":accountNumber",
+												"limits"
+											],
+											"variable": [
+												{
+													"key": "accountNumber",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\"\n}"
+								}
+							]
+						}
+					],
+					"description": "Endpoints related to managing payment limits."
+				},
+				{
+					"name": "Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payeeId\": \"{{$randomUUID}}\",\n    \"amount\": \"{{$randomPrice}}\",\n    \"reference\": \"{{$randomLoremSentence}}\",\n    \"date\": \"{{$randomDateRecent}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payments/:accountNumber/transfer",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								":accountNumber",
+								"transfer"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": null
+								}
+							]
+						},
+						"description": "Retrieves the current payment limits for a specific account."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payeeId\": \"c66c9c47-79f7-4363-aed4-96148bf3f0bd\",\n    \"amount\": \"785.83\",\n    \"reference\": \"Consequuntur exercitationem officiis est suscipit perferendis quis quibusdam.\",\n    \"date\": \"Tue May 30 2023 23:03:08 GMT+0200 (Central European Summer Time)\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payments/:accountNumber/transfer",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										":accountNumber",
+										"transfer"
+									],
+									"variable": [
+										{
+											"key": "accountNumber",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transaction\": \"complete\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This section includes endpoints for managing payments and payees, such as listing payees, adding payees, retrieving payment limits, and performing transfers."
+		},
+		{
+			"name": "Investment management",
+			"item": [
+				{
+					"name": "List account investments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/investments/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"investments",
+								"list"
+							]
+						},
+						"description": "Retrieves a list of investments for a specific account, providing details such as the investment name, symbol, quantity, current price, and total value."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/investments/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"investments",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"investment_1\",\n    \"name\": \"Apple Inc.\",\n    \"symbol\": \"AAPL\",\n    \"quantity\": 100,\n    \"currentPrice\": 134.56,\n    \"totalValue\": 13456.00\n  },\n  {\n    \"id\": \"investment_2\",\n    \"name\": \"Tesla Inc.\",\n    \"symbol\": \"TSLA\",\n    \"quantity\": 50,\n    \"currentPrice\": 670.98,\n    \"totalValue\": 33549.00\n  }\n]\n"
+						}
+					]
+				},
+				{
+					"name": "Buy Investment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"symbol\": \"AAPL\",\n  \"quantity\": 10,\n  \"amount\": 1350.00\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/investments/buy",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"investments",
+								"buy"
+							]
+						},
+						"description": "Allows users to buy investments by specifying the symbol, quantity, and amount they wish to invest. This endpoint executes the purchase and updates the investment portfolio accordingly."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"symbol\": \"AAPL\",\n  \"quantity\": 10,\n  \"amount\": 1350.00\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/investments/buy",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"investments",
+										"buy"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Investment purchased successfully.\",\n  \"investment\": {\n    \"id\": \"investment_3\",\n    \"name\": \"Apple Inc.\",\n    \"symbol\": \"AAPL\",\n    \"quantity\": 110,\n    \"averagePrice\": 122.50,\n    \"totalValue\": 13475.00\n  }\n}\n"
+						}
+					]
+				},
+				{
+					"name": "Sell Investment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"investmentId\": \"investment_1\",\n  \"quantity\": 25\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/investments/sell",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"investments",
+								"sell"
+							]
+						},
+						"description": "Enables users to sell a specific investment from their portfolio by providing the investment ID and the quantity they wish to sell. The endpoint processes the sale and adjusts the portfolio accordingly."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"investmentId\": \"investment_1\",\n  \"quantity\": 25\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/investments/sell",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"investments",
+										"sell"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Investment sold successfully.\",\n  \"investment\": {\n    \"id\": \"investment_1\",\n    \"name\": \"Apple Inc.\",\n    \"symbol\": \"AAPL\",\n    \"quantity\": 75,\n    \"averagePrice\": 130.00,\n    \"totalValue\": 9750.00\n  }\n}\n"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints related to investment management, allowing users to manage their investment portfolio, buy and sell investments, and retrieve information about their current holdings."
+		},
+		{
+			"name": "Card Management",
+			"item": [
+				{
+					"name": "Issue New Card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"limit\": 1000,\n    \"expiryDate\": \"2025-12-31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/issue",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"issue"
+							]
+						},
+						"description": "This endpoint is used to issue a new debit/credit card to a customer. The request should include the customer ID and card type. The response will provide the card ID, customer ID, card type, and expiry date."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"limit\": 1000,\n    \"expiryDate\": \"2025-12-31\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/cards/issue",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"cards",
+										"issue"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"limit\": 1000,\n    \"expiryDate\": \"2025-12-31\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Block/Unblock Card",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"ABC123\",\n    \"block\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/block-unblock",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"block-unblock"
+							]
+						},
+						"description": "This endpoint allows blocking or unblocking a debit/credit card. The request should include the card ID and customer ID. The response will indicate the updated status of the card."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cardId\": \"ABC123\",\n    \"block\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/cards/block-unblock",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"cards",
+										"block-unblock"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"blocked\": true,\n    \"expiryDate\": \"2025-12-31\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Set Card Limits",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"ABC123\",\n    \"dailyLimit\": 500,\n    \"monthlyLimit\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/set-limits",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"set-limits"
+							]
+						},
+						"description": "This endpoint is used to set limits for a debit/credit card such as daily and monthly limits. The request should include the card ID, customer ID, and the desired limit values. The response will indicate the updated limits for the card."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cardId\": \"ABC123\",\n    \"dailyLimit\": 500,\n    \"monthlyLimit\": 2000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/cards/set-limits",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"cards",
+										"set-limits"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"dailyLimit\": 500,\n    \"monthlyLimit\": 2000,\n    \"expiryDate\": \"2025-12-31\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Report Lost/Stolen Card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": \"ABC123\",\n    \"reportType\": \"lost\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cards/report-lost-stolen",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cards",
+								"report-lost-stolen"
+							]
+						},
+						"description": "This endpoint allows customers to report a lost or stolen debit/credit card. The request should include the card ID and customer ID. The response will indicate the updated status of the card."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cardId\": \"ABC123\",\n    \"reportType\": \"lost\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/cards/report-lost-stolen",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"cards",
+										"report-lost-stolen"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"cardType\": \"debit\",\n    \"reportType\": \"lost\",\n    \"expiryDate\": \"2025-12-31\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for debit/credit card operations, including issuing a new card, blocking/unblocking a card, setting card limits, and reporting a card lost/stolen."
+		},
+		{
+			"name": "Payment Initiation Service Provider",
+			"item": [
+				{
+					"name": "Initiate Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"123456789\",\n    \"amount\": 100,\n    \"recipient\": \"John Doe\",\n    \"accountNumber\": \"1234567890\",\n    \"bankCode\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payments/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"initiate"
+							]
+						},
+						"description": "This endpoint allows third-party providers to initiate a payment from the customer's bank account. The request should include the payment details such as payment ID, customer ID, and the payment amount. Upon successful initiation, the response will confirm the payment status."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"123456789\",\n    \"amount\": 100,\n    \"recipient\": \"John Doe\",\n    \"accountNumber\": \"1234567890\",\n    \"bankCode\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payments/initiate",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"initiate"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactionId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"amount\": 100,\n    \"recipient\": \"John Doe\",\n    \"accountNumber\": \"1234567890\",\n    \"bankCode\": \"12345\",\n    \"status\": \"pending\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Payment Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payments/check-status?transactionId=ABC123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"check-status"
+							],
+							"query": [
+								{
+									"key": "transactionId",
+									"value": "ABC123"
+								}
+							]
+						},
+						"description": "This endpoint allows checking the status of a payment by providing the payment ID as a path parameter. The response will indicate the current status of the payment."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/check-status?transactionId=ABC123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"check-status"
+									],
+									"query": [
+										{
+											"key": "transactionId",
+											"value": "ABC123"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactionId\": \"ABC123\",\n    \"customerId\": \"123456789\",\n    \"amount\": 100,\n    \"recipient\": \"John Doe\",\n    \"accountNumber\": \"1234567890\",\n    \"bankCode\": \"12345\",\n    \"status\": \"completed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Payment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payments/cancel?transactionId=ABC123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "transactionId",
+									"value": "ABC123"
+								}
+							]
+						},
+						"description": "This endpoint allows cancelling a payment initiated by a third-party provider. The payment ID should be provided as a path parameter. The response will confirm the cancellation status."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/cancel?transactionId=ABC123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "transactionId",
+											"value": "ABC123"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactionId\": \"ABC123\",\n    \"status\": \"cancelled\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Payments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payments/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"list"
+							]
+						},
+						"description": "This endpoint retrieves a list of all payments initiated by third-party providers. The response will include payment details such as payment ID, customer ID, and payment amount."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payments/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payments",
+										"list"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"transactionId\": \"ABC123\",\n        \"customerId\": \"123456789\",\n        \"amount\": 100,\n        \"recipient\": \"John Doe\",\n        \"accountNumber\": \"1234567890\",\n        \"bankCode\": \"12345\",\n        \"status\": \"completed\"\n    },\n    {\n        \"transactionId\": \"XYZ789\",\n        \"customerId\": \"987654321\",\n        \"amount\": 50,\n        \"recipient\": \"Jane Smith\",\n        \"accountNumber\": \"0987654321\",\n        \"bankCode\": \"54321\",\n        \"status\": \"pending\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for third-party providers to initiate payments directly from the customer's bank account, including initiating a payment, checking the status of a payment, and canceling/listing payments."
+		},
+		{
+			"name": "Loan Management",
+			"item": [
+				{
+					"name": "Apply for Loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"123456789\",\n    \"loanAmount\": 10000,\n    \"interestRate\": 5.5,\n    \"duration\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/apply",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								"apply"
+							]
+						},
+						"description": "This endpoint is used by customers to apply for a loan. The request should include the customer ID, loan amount, interest rate, and duration. The response will provide the loan ID, customer ID, loan amount, interest rate, duration, and current status."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"123456789\",\n    \"loanAmount\": 10000,\n    \"interestRate\": 5.5,\n    \"duration\": 12\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/loans/apply",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"loans",
+										"apply"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"loanId\": \"L123456\",\n    \"customerId\": \"123456789\",\n    \"loanAmount\": 10000,\n    \"interestRate\": 5.5,\n    \"duration\": 12,\n    \"status\": \"approved\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Loan Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/loans/check-status?loanId=L123456",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								"check-status"
+							],
+							"query": [
+								{
+									"key": "loanId",
+									"value": "L123456"
+								}
+							]
+						},
+						"description": "This endpoint allows checking the status of a loan application by providing the loan ID as a path parameter. The response will indicate the current status of the loan."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/loans/check-status?loanId=L123456",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"loans",
+										"check-status"
+									],
+									"query": [
+										{
+											"key": "loanId",
+											"value": "L123456"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"loanId\": \"L123456\",\n    \"customerId\": \"123456789\",\n    \"loanAmount\": 10000,\n    \"interestRate\": 5.5,\n    \"duration\": 12,\n    \"status\": \"approved\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Repayment Management",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loanId\": \"L123456\",\n    \"paymentAmount\": 1000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/loans/repay",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								"repay"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"loanId\": \"L123456\",\n    \"paymentAmount\": 1000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/loans/repay",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"loans",
+										"repay"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"loanId\": \"L123456\",\n    \"customerId\": \"123456789\",\n    \"paymentAmount\": 1000,\n    \"status\": \"paid\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Loan Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/loans/check-balance?loanId=L123456",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								"check-balance"
+							],
+							"query": [
+								{
+									"key": "loanId",
+									"value": "L123456"
+								}
+							]
+						},
+						"description": "Retrieves the current balance of the loan, providing users with an overview of the outstanding loan amount, interest accrued, and repayment schedule."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/loans/check-balance?loanId=L123456",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"loans",
+										"check-balance"
+									],
+									"query": [
+										{
+											"key": "loanId",
+											"value": "L123456"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"loanId\": \"L123456\",\n    \"customerId\": \"123456789\",\n    \"loanAmount\": 10000,\n    \"interestRate\": 5.5,\n    \"duration\": 12,\n    \"outstandingBalance\": 8000\n}"
+						}
+					]
+				},
+				{
+					"name": "View Repayment History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/loans/repayment-history?loanId=L123456",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"loans",
+								"repayment-history"
+							],
+							"query": [
+								{
+									"key": "loanId",
+									"value": "L123456"
+								}
+							]
+						},
+						"description": "Retrieves the repayment history for a specific loan, allowing users to review past payments, due dates, and any missed or late payments."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/loans/repayment-history?loanId=L123456",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"loans",
+										"repayment-history"
+									],
+									"query": [
+										{
+											"key": "loanId",
+											"value": "L123456"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"paymentId\": \"P123456\",\n        \"loanId\": \"L123456\",\n        \"customerId\": \"123456789\",\n        \"paymentAmount\": 1000,\n        \"status\": \"paid\"\n    },\n    {\n        \"paymentId\": \"P789012\",\n        \"loanId\": \"L123456\",\n        \"customerId\": \"123456789\",\n        \"paymentAmount\": 2000,\n        \"status\": \"paid\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for managing loans, including loan application, status tracking, repayment management, checking loan balance, and viewing repayment history."
+		},
+		{
+			"name": "Deposit Management APIs",
+			"item": [
+				{
+					"name": "Create Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"123456789\",\n    \"depositAmount\": 5000,\n    \"duration\": 6,\n    \"interestRate\": 3.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/deposits/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"deposits",
+								"create"
+							]
+						},
+						"description": "Enables users to create a new deposit account, specifying details such as the deposit amount, term, and interest rate. This endpoint initiates the creation of a deposit account."
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": \"123456789\",\n    \"depositAmount\": 5000,\n    \"duration\": 6,\n    \"interestRate\": 3.5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/deposits/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"deposits",
+										"create"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"depositId\": \"D123456\",\n    \"customerId\": \"123456789\",\n    \"depositAmount\": 5000,\n    \"duration\": 6,\n    \"interestRate\": 3.5,\n    \"status\": \"active\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Deposit Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/deposits/check-status?depositId=D123456",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"deposits",
+								"check-status"
+							],
+							"query": [
+								{
+									"key": "depositId",
+									"value": "D123456"
+								}
+							]
+						},
+						"description": "Allows users to check the status of their deposits, providing information on the current balance, maturity date, and accrued interest"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/deposits/check-status?depositId=D123456",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"deposits",
+										"check-status"
+									],
+									"query": [
+										{
+											"key": "depositId",
+											"value": "D123456"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"depositId\": \"D123456\",\n    \"customerId\": \"123456789\",\n    \"depositAmount\": 5000,\n    \"duration\": 6,\n    \"interestRate\": 3.5,\n    \"status\": \"active\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for deposit management, including creating a deposit and checking the status of a deposit."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://dd28b8de-0a7e-4a8d-b5d4-8f25f5a35069.mock.pstmn.io"
+		}
+	]
+}
